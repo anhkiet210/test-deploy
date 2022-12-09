@@ -3,7 +3,6 @@
   "version": "1.0.0",
   "main": "index.js",
   "license": "MIT",
-  "type": "module",
   "dependencies": {
     "assert": "^2.0.0",
     "bcrypt": "^5.1.0",

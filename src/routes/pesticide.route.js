@@ -1,12 +1,23 @@
-import * as PesticideController from '../app/http/controllers/pesticide.controller';
-import express from 'express';
-import isAuthAdmin from '../app/http/middlewares/authAdmin.middleware';
+const PesticideController = require("../app/http/controllers/pesticide.controller");
+const express = require("express");
+const isAuthAdmin = require("../app/http/middlewares/authAdmin.middleware");
 
 const PesticideRouter = express.Router();
 
-PesticideRouter.post('/create', isAuthAdmin, PesticideController.createPesticide);
-PesticideRouter.put('/update/:id', isAuthAdmin, PesticideController.updatePesticide);
-PesticideRouter.get('/get-pesticide-by-id-pest/:id', PesticideController.getPesticedeByIdPest);
-PesticideRouter.get('/', PesticideController.getAllPesticides);
+PesticideRouter.post(
+  "/create",
+  isAuthAdmin,
+  PesticideController.createPesticide
+);
+PesticideRouter.put(
+  "/update/:id",
+  isAuthAdmin,
+  PesticideController.updatePesticide
+);
+PesticideRouter.get(
+  "/get-pesticide-by-id-pest/:id",
+  PesticideController.getPesticedeByIdPest
+);
+PesticideRouter.get("/", PesticideController.getAllPesticides);
 
-export default PesticideRouter;
+module.exports = PesticideRouter;

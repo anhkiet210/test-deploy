@@ -1,4 +1,4 @@
-import {
+const {
   Register,
   Login,
   getAllUser,
@@ -7,10 +7,10 @@ import {
   changeAvatar,
   changePassword,
   deleteUser,
-} from "../app/http/controllers/user.controller";
-import isAuth from "../app/http/middlewares/auth.middleware";
-import isAuthAdmin from "../app/http/middlewares/authAdmin.middleware";
-import express from "express";
+} = require("../app/http/controllers/user.controller");
+const isAuth = require("../app/http/middlewares/auth.middleware");
+const isAuthAdmin = require("../app/http/middlewares/authAdmin.middleware");
+const express = require("express");
 
 const UserRouter = express.Router();
 
@@ -23,4 +23,4 @@ UserRouter.put("/change-avatar", isAuth, changeAvatar);
 UserRouter.delete("/delete/:id", isAuthAdmin, deleteUser);
 UserRouter.get("/", isAuthAdmin, getAllUser);
 
-export default UserRouter;
+module.exports = UserRouter;

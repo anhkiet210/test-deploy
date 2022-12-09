@@ -1,24 +1,23 @@
-import mongoose from 'mongoose';
+const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 const CauHoi = new Schema({
-    noidung: {
-        type: String,
-        required: true,
-    },
-    NguoiDung: {
-        type: Schema.Types.ObjectId,
-        required: true,
-        ref: 'NguoiDung',
-    },
-    thoigian: {
-        type: Date,
-    },
-    tieude: {
-        type: String,
-        required: true,
-    },
+  noidung: {
+    type: String,
+    required: true,
+  },
+  NguoiDung: {
+    type: Schema.Types.ObjectId,
+    required: true,
+    ref: "NguoiDung",
+  },
+  thoigian: {
+    type: Date,
+  },
+  tieude: {
+    type: String,
+    required: true,
+  },
 });
 
-const QuestionModel = mongoose.model('CauHoi', CauHoi);
+module.exports = mongoose.model("CauHoi", CauHoi);
 
-export default QuestionModel;
