@@ -5,9 +5,20 @@
   "license": "MIT",
   "type": "module",
   "dependencies": {
-    "express": "^4.18.2"
+    "assert": "^2.0.0",
+    "bcrypt": "^5.1.0",
+    "cloudinary": "^1.32.0",
+    "cors": "^2.8.5",
+    "decision-tree": "^0.3.7",
+    "dotenv": "^16.0.3",
+    "express": "^4.18.2",
+    "express-fileupload": "^1.4.0",
+    "jsonwebtoken": "^8.5.1",
+    "lodash": "^4.17.21",
+    "mongoose": "^6.8.0",
+    "nodemon": "^2.0.20"
   },
   "scripts": {
-    "start": "node index.js"
+    "start": "nodemon --experimental-modules --es-module-specifier-resolution=node index.js"
   }
 }
