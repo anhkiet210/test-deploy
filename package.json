@@ -19,6 +19,6 @@
     "nodemon": "^2.0.20"
   },
   "scripts": {
-    "start": "nodemon --experimental-modules --es-module-specifier-resolution=node index.js"
+    "start": "nodemon index.js"
   }
 }
