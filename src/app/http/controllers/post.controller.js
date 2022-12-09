@@ -39,7 +39,7 @@ const createPost = async (req, res, next) => {
     const user = await UserModel.findById(post._id);
     res.status(200).json({
       success: true,
-      message: "Thêm bài viết thành công.",
+      message: "Thêm bài viết thành công. Hãy chờ bài viết được duyệt nhé",
       data: { post, user },
     });
   } catch (error) {
