@@ -50,9 +50,14 @@ const createPesticide = async (req, res, next) => {
     const pesticide = new PesticideModel({
       ...infoPesticide,
     });
-    pests.forEach((item) => {
-      pesticide.Benhs.push(JSON.parse(item));
-    });
+    // console.log(typeof pests);
+    if (typeof pests !== "string") {
+      pests.forEach((item) => {
+        pesticide.Benhs.push(JSON.parse(item));
+      });
+    } else {
+      pesticide.Benhs.push(JSON.parse(pests));
+    }
     pesticide.save();
     return res.status(200).json({
       success: true,
@@ -63,7 +68,7 @@ const createPesticide = async (req, res, next) => {
     console.log(error);
     res.status(500).json({
       success: false,
-      message: error.message,
+      message: "Thêm thuốc thất bại!",
     });
   }
 };

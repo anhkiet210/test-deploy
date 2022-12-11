@@ -26,6 +26,7 @@ const PestRouter = require("./src/routes/pest.route.js");
 const PesticideRouter = require("./src/routes/pesticide.route.js");
 const PostRouter = require("./src/routes/post.route.js");
 const AdminRouter = require("./src/routes/admin.route.js");
+const StatisticalRouter = require("./src/routes/statistical.route.js");
 
 const app = express();
 dotenv.config({ path: ".env" });
@@ -48,6 +49,7 @@ app.use("/api/pest", PestRouter);
 app.use("/api/pesticide", PesticideRouter);
 app.use("/api/post", PostRouter);
 app.use("/api/admin", AdminRouter);
+app.use("/api/statistical", StatisticalRouter);
 
 app.get("/", (req, res) => {
   res.send("tracuusaubenh-Thấu hiểu cây trồng");

@@ -1,7 +1,9 @@
 const PestModel = require("../../../models/pest.model");
 // const DecisionTree = require('../../../helper/decisionTree');
 const DecisionTree = require("decision-tree");
+const PesticideModel = require("../../../models/pesticide.model");
 const CropModel = require("../../../models/crop.model");
+const StatisticalModel = require("../../../models/statistical.model");
 const { upload } = require("../../../helper/cloudinary");
 
 const folder = "ak-tracuusaubenh/img-pests";
@@ -138,7 +140,7 @@ const detectPest = async (req, res, next) => {
     const infoPest = {
       la: req.body.la !== "" ? req.body.la : "không có",
       than: req.body.than !== "" ? req.body.than : "không có",
-      re: req.body.than !== "" ? req.body.than : "không có",
+      re: req.body.re !== "" ? req.body.re : "không có",
     };
     // const training_data = [
     //     {
@@ -304,6 +306,28 @@ const detectPest = async (req, res, next) => {
 
     const predicted_class = dt.predict(infoPest);
     const crop = await CropModel.findById(predicted_class.LoaiCay);
+    const pesticide = await PesticideModel.find({
+      "Benhs.idBenh": predicted_class._id,
+    });
+    const statistical = await StatisticalModel.findOne({
+      "tukhoa.la": infoPest.la,
+      "tukhoa.than": infoPest.than,
+      "tukhoa.re": infoPest.re,
+      "benh.tenBenh": predicted_class.ten,
+    });
+    if (statistical) {
+      statistical.luot += 1;
+      statistical.save();
+      // console.log("có");
+    } else {
+      // console.log("không");
+      const benh = {
+        tenBenh: predicted_class.ten,
+        anh: predicted_class.anh,
+      };
+      await StatisticalModel.create({ tukhoa: infoPest, benh: benh });
+    }
+    // console.log("predicted_class: ", predicted_class);
     // var predicted_class = dt.predict({
     //     color: 'red',
     //     shape: 'circle',
@@ -313,7 +337,7 @@ const detectPest = async (req, res, next) => {
       success: true,
       message: "Thành công.",
       // data: predicted_class,
-      data: { pest: predicted_class, crop },
+      data: { pest: predicted_class, crop, pesticide },
     });
   } catch (error) {
     console.log(error);
